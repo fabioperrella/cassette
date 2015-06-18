@@ -16,30 +16,22 @@ require 'logger'
 module Cassette
   extend self
 
+  attr_writer :config, :logger
+
   DEFAULT_TIMEOUT = 10
 
   def logger
-    @@logger ||= begin
-                   if defined?(Rails) && Rails.logger
-                     Rails.logger
-                   else
-                     Logger.new('/dev/null')
-                   end
-                 end
-  end
-
-  def logger=(logger)
-    @@logger = logger
+    @logger ||= begin
+                  if defined?(::Rails) && ::Rails.logger
+                    ::Rails.logger
+                  else
+                    Logger.new('/dev/null')
+                  end
+                end
   end
 
   def config
-    if defined?(@@config)
-      @@config
-    end
-  end
-
-  def config=(config)
-    @@config = config
+    @config if defined?(@config)
   end
 
   def new_request(uri, timeout)

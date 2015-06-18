@@ -5,8 +5,7 @@ describe Cassette do
   let(:response) do
     Faraday.new do |builder|
       builder.adapter :test do |stub|
-        stub.post(uri, 'ping=pong') do |env|
-          headers = env.request_headers
+        stub.post(uri, 'ping=pong') do |_env|
           [200, {}, '{ok: true}']
         end
       end
@@ -16,8 +15,7 @@ describe Cassette do
   let(:failed_response) do
     Faraday.new do |builder|
       builder.adapter :test do |stub|
-        stub.post(uri, 'ping=pong') do |env|
-          headers = env.request_headers
+        stub.post(uri, 'ping=pong') do |_env|
           [500, {}, '{ok: false}']
         end
       end

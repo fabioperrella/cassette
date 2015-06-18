@@ -2,6 +2,8 @@ require 'simplecov'
 require 'simplecov-rcov'
 require 'simplecov-gem-adapter'
 require 'yaml'
+require 'rspec/its'
+require 'faker'
 
 module Fixtures
   def fixture(name)
